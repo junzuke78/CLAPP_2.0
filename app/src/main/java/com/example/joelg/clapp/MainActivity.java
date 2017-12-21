@@ -1,34 +1,39 @@
 package com.example.joelg.clapp;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
-
-import java.util.List;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+
+
+// menu setup
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.actvity_main);
+    }
 
-        TextView textView = (TextView) findViewById(R.id.text);
+    public void NewJob(View view) {
+        Intent StartNewJob = new Intent(this, JobActivity.class);
+        startActivity(StartNewJob);
 
-        // Put this in a different thread or use AsyncSession in greenDAO.
-        // For Demo purpose, this query is made on main thread but it should in a different thread.
-        User user = ((DemoApp)getApplication()).getDaoSession().getUserDao().load(1L);
+    }
+
+    public void ExitApp(View view) {
+        finish();
+        moveTaskToBack(true);
+    }
+
+    public void Options(View view) {
+        Intent StartOptions = new Intent(this, OptionsActivity.class);
+        startActivity(StartOptions);
 
 
-        List<Job> jobList = ((DemoApp)getApplication()).getDaoSession().getJobDao().loadAll();
-
-        for(Job j:jobList){
-            Log.d("Job_D", j.getTitle())
-;        }
-
-        if(user != null){
-            textView.setText(user.getName());
-        }
     }
 }
+
+
+
