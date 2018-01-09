@@ -10,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.example.joelg.clapp.db.DaoSession;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -35,6 +37,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
     private List<Task> TaskList;
 
 
+
     public TaskAdapter(List<Task> taskList) {
         TaskList = taskList;
     }
@@ -55,6 +58,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
         holder.tasktitle.setText(task.getTitle() + "");
         holder.IsDone.setText(task.getIsDone() + "");
         holder.Tstamp.setText(task.getTimeStamp() + "");
+        holder.id = task.getId();
 
     }
 
@@ -70,32 +74,47 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
+        private Long id;
         private TextView tasktitle;
         private CheckBox IsDone;
         private TextView Tstamp;
         private CardView cv;
         private Calendar calander;
         private SimpleDateFormat simpledateformat;
-        private String Date;
-
+        private String date;
+        private String ts;
 
         public MyViewHolder(View view) {
             super(view);
             cv = itemView.findViewById(R.id.cv);
             tasktitle = view.findViewById(R.id.task_title);
             IsDone = view.findViewById(R.id.isDone);
-            Tstamp = view.findViewById(R.id.Time);
+            Tstamp = view.findViewById(R.id.TaskTS);
             IsDone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+
                     IsDone.setClickable(false);
                     //time stamp
                     calander = Calendar.getInstance();
                     simpledateformat = new SimpleDateFormat("HH:mm:ss");
-                    Date = simpledateformat.format(calander.getTime());
+                    date = simpledateformat.format(calander.getTime());
+                    DaoSession daoSession = ((CLAPP) IsDone.getContext().getApplicationContext()).getDaoSession();
+                    TaskDao taskDao = daoSession.getTaskDao();
+                    Task t = taskDao.load(id);
+                    t.setTimeStamp(date);
+                    t.setIsDone(1);
+                    Tstamp.setText(date);
+
+
+                    //
+
+
 
                 }
             });
+
 
         }
 

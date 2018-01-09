@@ -19,13 +19,13 @@ public class Task {
     private int IsDone;
 
     @Property(nameInDb = "time")
-    private int timeStamp;
+    private String timeStamp;
 
     @Id(autoincrement = true)
     private Long id;
 
-    @Generated(hash = 688392082)
-    public Task(String title, int IsDone, int timeStamp, Long id) {
+    @Generated(hash = 481646919)
+    public Task(String title, int IsDone, String timeStamp, Long id) {
         this.title = title;
         this.IsDone = IsDone;
         this.timeStamp = timeStamp;
@@ -52,11 +52,11 @@ public class Task {
         this.IsDone = IsDone;
     }
 
-    public int getTimeStamp() {
+    public String getTimeStamp() {
         return this.timeStamp;
     }
 
-    public void setTimeStamp(int timeStamp) {
+    public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
 

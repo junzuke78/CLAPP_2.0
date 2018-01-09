@@ -11,7 +11,7 @@ import com.example.joelg.clapp.db.DaoSession;
 
 
 //singleton
-public class AppController extends Application {
+public class CLAPP extends Application {
 
     private DaoSession mDaoSession;
 
@@ -29,11 +29,11 @@ public class AppController extends Application {
         }
 
         if (mDaoSession.getTaskDao().loadAll().size() == 0) {
-            mDaoSession.getTaskDao().insert(new Task("Empty bin and replace liner thats nice", 0, 0000, 1L));
+            mDaoSession.getTaskDao().insert(new Task("Empty bin and replace liner thats nice", 0, "", 1L));
             //   (String title, String IsDone, String TimeStamp, Long id)
-            mDaoSession.getTaskDao().insert(new Task("make beds", 0, 0000, 2L));
-            mDaoSession.getTaskDao().insert(new Task("make couch", 0, 0000, 3L));
-            mDaoSession.getTaskDao().insert(new Task("clean ligths", 0, 0000, 4L));
+            mDaoSession.getTaskDao().insert(new Task("make beds", 0, "", 2L));
+            mDaoSession.getTaskDao().insert(new Task("make couch", 0, "", 3L));
+            mDaoSession.getTaskDao().insert(new Task("clean ligths", 0, "", 4L));
         }
     }
 

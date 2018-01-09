@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void NewJob(View view) {
-        Intent StartNewJob = new Intent(this, JobActivity.class);
+        Intent StartNewJob = new Intent(this, JobManagerActivity.class);
         startActivity(StartNewJob);
 
     }
